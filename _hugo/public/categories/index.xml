@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on getrandom()</title>
+    <link>http://localhost:1313/categories/</link>
+    <description>Recent content in Categories on getrandom()</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>Copyright © 2024&lt;script&gt;new Date().getFullYear()&gt;2024&amp;&amp;document.write(&#34; - &#34;&#43;new Date().getFullYear());&lt;/script&gt; d8a.wtf. &lt;a href=&#34;http://creativecommons.org/licenses/by/4.0/&#34;&gt;Some rights reserved&lt;/a&gt;.</copyright>
+    <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

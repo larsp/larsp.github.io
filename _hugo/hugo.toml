@@ -1,0 +1,19 @@
+baseURL = 'https://blog.d8a.wtf/'
+languageCode = 'en-us'
+title = 'getrandom()'
+copyright = "Copyright © 2024<script>new Date().getFullYear()>2024&&document.write(\" - \"+new Date().getFullYear());</script> d8a.wtf. <a href=\"http://creativecommons.org/licenses/by/4.0/\">Some rights reserved</a>."
+
+[params]
+  # color style
+  color = 'linen'                           # linen, wheat, gray, light
+  github = 'larsp'
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 10
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 20

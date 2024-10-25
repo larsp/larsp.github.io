@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on getrandom()</title>
+    <link>https://blog.d8a.wtf/tags/</link>
+    <description>Recent content in Tags on getrandom()</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>Copyright © 2024&lt;script&gt;new Date().getFullYear()&gt;2024&amp;&amp;document.write(&#34; - &#34;&#43;new Date().getFullYear());&lt;/script&gt; d8a.wtf. &lt;a href=&#34;http://creativecommons.org/licenses/by/4.0/&#34;&gt;Some rights reserved&lt;/a&gt;.</copyright>
+    <lastBuildDate>Wed, 05 Dec 2018 20:00:00 -0100</lastBuildDate>
+    <atom:link href="https://blog.d8a.wtf/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Distributed Systems</title>
+      <link>https://blog.d8a.wtf/tags/distributed-systems/</link>
+      <pubDate>Wed, 05 Dec 2018 20:00:00 -0100</pubDate>
+      <guid>https://blog.d8a.wtf/tags/distributed-systems/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>MySQL</title>
+      <link>https://blog.d8a.wtf/tags/mysql/</link>
+      <pubDate>Wed, 05 Dec 2018 20:00:00 -0100</pubDate>
+      <guid>https://blog.d8a.wtf/tags/mysql/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Programming</title>
+      <link>https://blog.d8a.wtf/tags/programming/</link>
+      <pubDate>Wed, 05 Dec 2018 20:00:00 -0100</pubDate>
+      <guid>https://blog.d8a.wtf/tags/programming/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Software Development</title>
+      <link>https://blog.d8a.wtf/tags/software-development/</link>
+      <pubDate>Wed, 05 Dec 2018 20:00:00 -0100</pubDate>
+      <guid>https://blog.d8a.wtf/tags/software-development/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Cassandra</title>
+      <link>https://blog.d8a.wtf/tags/cassandra/</link>
+      <pubDate>Wed, 23 Nov 2016 19:45:48 -0700</pubDate>
+      <guid>https://blog.d8a.wtf/tags/cassandra/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Inconsistency</title>
+      <link>https://blog.d8a.wtf/tags/inconsistency/</link>
+      <pubDate>Wed, 23 Nov 2016 19:45:48 -0700</pubDate>
+      <guid>https://blog.d8a.wtf/tags/inconsistency/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Timestamp Tie</title>
+      <link>https://blog.d8a.wtf/tags/timestamp-tie/</link>
+      <pubDate>Wed, 23 Nov 2016 19:45:48 -0700</pubDate>
+      <guid>https://blog.d8a.wtf/tags/timestamp-tie/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>WAT</title>
+      <link>https://blog.d8a.wtf/tags/wat/</link>
+      <pubDate>Wed, 23 Nov 2016 19:45:48 -0700</pubDate>
+      <guid>https://blog.d8a.wtf/tags/wat/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

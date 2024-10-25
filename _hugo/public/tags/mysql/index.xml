@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MySQL on getrandom()</title>
+    <link>http://localhost:1313/tags/mysql/</link>
+    <description>Recent content in MySQL on getrandom()</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>Copyright © 2024&lt;script&gt;new Date().getFullYear()&gt;2024&amp;&amp;document.write(&#34; - &#34;&#43;new Date().getFullYear());&lt;/script&gt; d8a.wtf. &lt;a href=&#34;http://creativecommons.org/licenses/by/4.0/&#34;&gt;Some rights reserved&lt;/a&gt;.</copyright>
+    <lastBuildDate>Wed, 05 Dec 2018 20:00:00 -0100</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Distributed Worker Queues - A piece of Cake🍰</title>
+      <link>http://localhost:1313/post/distributed-worker-queue/</link>
+      <pubDate>Wed, 05 Dec 2018 20:00:00 -0100</pubDate>
+      <guid>http://localhost:1313/post/distributed-worker-queue/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/queue.webp&#34; alt=&#34;Photo by Trevor Cole on Unsplash&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;This post was originally published on &lt;a href=&#34;https://medium.com/yoyo-labs/distributed-worker-queues-a-piece-of-cake-fe1a7356e156&#34;&gt;medium&lt;/a&gt; in December 2018. I&amp;rsquo;ve republished it here as part of consolidating my writing on this blog. The original content remains unchanged except for minor formatting adjustments.&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;Distributed Worker Queues are a valuable decoupling mechanism for various use-cases in software &amp;amp; systems engineering:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Decoupling of job production and job consumption, e.g. for tasks where human interaction is needed.&lt;/li&gt;&#xA;&lt;li&gt;Minimize latencies in user facing systems by moving resource intensive tasks to a designated set of machines, e.g. for video encoding.&lt;/li&gt;&#xA;&lt;li&gt;Purpose-built computational resources are required for a specific task, e.g. using GPUs to train a machine learning model.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Enter a database-backed distributed worker queue mechanism that is easy to test, deploy, and maintain, as well as reliable and cheap.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

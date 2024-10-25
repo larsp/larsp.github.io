@@ -1,0 +1,385 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en-us"
+  dir="ltr"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Distributed Worker Queues - A piece of Cake🍰 - getrandom()</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="
+This post was originally published on medium in December 2018. I&rsquo;ve republished it here as part of consolidating my writing on this blog. The original content remains unchanged except for minor formatting adjustments.
+Distributed Worker Queues are a valuable decoupling mechanism for various use-cases in software &amp; systems engineering:
+
+Decoupling of job production and job consumption, e.g. for tasks where human interaction is needed.
+Minimize latencies in user facing systems by moving resource intensive tasks to a designated set of machines, e.g. for video encoding.
+Purpose-built computational resources are required for a specific task, e.g. using GPUs to train a machine learning model.
+
+Enter a database-backed distributed worker queue mechanism that is easy to test, deploy, and maintain, as well as reliable and cheap." />
+  <meta name="author" content="getrandom()" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:1313/apple-touch-icon.png"
+  />
+
+  
+  <meta name="generator" content="Hugo 0.136.3">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-[--w] px-8 lg:justify-center">
+  <div class="relative z-50 ltr:mr-auto rtl:ml-auto flex items-center">
+    <a class="-translate-y-[1px] text-2xl font-medium" href="http://localhost:1313/"
+      >getrandom()</a
+    >
+  </div>
+
+  <div
+    class="btn-menu relative z-50 ltr:-mr-8 rtl:-ml-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse">
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/"
+        >Home</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse dark:invert ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
+    >
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/larsp"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-14">
+    <h1 class="!my-0 pb-2.5">Distributed Worker Queues - A piece of Cake🍰</h1>
+
+    
+    <div class="text-xs antialiased opacity-60">
+      
+      <time>Dec 5, 2018</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><p><img src="/img/queue.webp" alt="Photo by Trevor Cole on Unsplash"></p>
+<p><em>This post was originally published on <a href="https://medium.com/yoyo-labs/distributed-worker-queues-a-piece-of-cake-fe1a7356e156">medium</a> in December 2018. I&rsquo;ve republished it here as part of consolidating my writing on this blog. The original content remains unchanged except for minor formatting adjustments.</em></p>
+<p>Distributed Worker Queues are a valuable decoupling mechanism for various use-cases in software &amp; systems engineering:</p>
+<ul>
+<li>Decoupling of job production and job consumption, e.g. for tasks where human interaction is needed.</li>
+<li>Minimize latencies in user facing systems by moving resource intensive tasks to a designated set of machines, e.g. for video encoding.</li>
+<li>Purpose-built computational resources are required for a specific task, e.g. using GPUs to train a machine learning model.</li>
+</ul>
+<p>Enter a database-backed distributed worker queue mechanism that is easy to test, deploy, and maintain, as well as reliable and cheap.</p>
+<h3 id="mysql-for-a-distributed-worker-queue">MySQL for a Distributed Worker Queue?</h3>
+<p>MySQL v8.0.1 <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-locking-reads.html#innodb-locking-reads-nowait-skip-locked">introduced</a> (finally 🥳) a <code>SKIP LOCKED</code> option to <code>SELECT … FOR UPDATE</code> and <code>SELECT … FOR SHARE</code> statements. Thus, a locking <code>FOR UPDATE</code> read that leverages the new <code>SKIP LOCKED</code> option will not wait to acquire a row lock, but instead, will simply ignore locked rows in the result.</p>
+<p>Combined with transactions this becomes a handy feature to implement a simple, reliable and efficient distributed worker queue. Let’s dive into a possible solution.</p>
+<h3 id="table-schema">Table Schema</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">EXISTS</span> <span style="color:#a6e22e">worker_queue</span>
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>    id <span style="color:#66d9ef">BIGINT</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">AUTO_INCREMENT</span> <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
+</span></span><span style="display:flex;"><span>    command <span style="color:#66d9ef">TEXT</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+</span></span><span style="display:flex;"><span>    is_done BOOLEAN <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">FALSE</span>,
+</span></span><span style="display:flex;"><span>    failure_count <span style="color:#66d9ef">SMALLINT</span> <span style="color:#66d9ef">DEFAULT</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>) <span style="color:#66d9ef">ENGINE</span><span style="color:#f92672">=</span>InnoDB <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">CHARSET</span><span style="color:#f92672">=</span>UTF8MB4;
+</span></span></code></pre></div><p>We are going to introduce an auto-increment <code>id</code> field. As follows, sorting in ascending or descending order on the <code>id</code> field will enable either <em>FIFO</em> or <em>LIFO</em> queue characteristics. In the given example the <code>command</code> is a simple text field, but it could be anything fitting your needs. In order to be able to indicate that a specific message in the queue has been processed the <code>is_done</code> field is introduced. Even retry and maximum retry capabilities can be realized through a simple <code>failure_count</code>.</p>
+<h3 id="adding-a-message">Adding a Message</h3>
+<p>Adding a new message is literally as simple as an <code>INSERT</code> into a table.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> <span style="color:#a6e22e">worker_queue</span> (command) <span style="color:#66d9ef">VALUES</span> (<span style="color:#960050;background-color:#1e0010">‘</span>do this<span style="color:#960050;background-color:#1e0010">’</span>);
+</span></span></code></pre></div><h3 id="retrieve--lock-a-message">Retrieve &amp; Lock a Message</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span>START TRANSACTION;<span style="color:#66d9ef">SELECT</span> id, command <span style="color:#66d9ef">FROM</span> worker_queue
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> failure_count <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">AND</span> is_done <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> id
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">LIMIT</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FOR</span> <span style="color:#66d9ef">UPDATE</span> SKIP LOCKED;
+</span></span></code></pre></div><p>A worker process will start a transaction which will stay open until the corresponding work is done. In our case we sort by <code>id</code> in ascending order to implement a FIFO. The given query will read and obtain a read-lock for one row, this keeps other worker instances from processing the message simultaneously. The query also filters rows which are currently locked using the newly introduced <code>SKIP LOCKED</code> option. Additionally <code>failure_count &lt; 3</code> will filter for rows which have not been consumed and failed for more than three times. We will cover this in more detail shortly. Once a lock is obtained, we can start processing the respective message. In case a worker process dies, the lock for a given message will be released automatically since the lock was obtained in a not yet committed transaction. This way the message will be available for consumption again.</p>
+<h3 id="acknowledge-a-message">Acknowledge a Message</h3>
+<p>To acknowledge that a message has been processed, <code>is_done</code> has to be set to <code>true</code> as final statement of the current transaction.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> worker_queue
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> is_done <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">=</span> <span style="color:#f92672">&lt;</span>id<span style="color:#f92672">&gt;</span>;COMMIT;
+</span></span></code></pre></div><h3 id="graceful-failure--maximum-retries">Graceful Failure &amp; Maximum Retries</h3>
+<p>Dead Letter Queue behavior can be achieved through the previously introduced <code>failure_count</code>. When a failure count for a message exceeds a certain threshold it will no longer be returned from the earlier query. A separate worker process which obtains such elements will help analyze and understand why messages are failing.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> worker_queue
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> is_done <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>, failure_count <span style="color:#f92672">=</span> failure_count <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">=</span> <span style="color:#f92672">&lt;</span>id<span style="color:#f92672">&gt;</span>;
+</span></span><span style="display:flex;"><span>COMMIT;
+</span></span></code></pre></div><h3 id="cleaning-up">Cleaning up</h3>
+<p>Since we are filling up the worker queue table with messages it is desirable to periodically clean up completed or faulty tasks. This could be accomplished through a simple delete:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">DELETE</span> <span style="color:#66d9ef">FROM</span> worker_queue
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> is_done <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">OR</span> failure_count <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">3</span>;
+</span></span></code></pre></div><p>If the history or an archive is needed, messages could be moved to different tables instead. MySQL’s <a href="https://dev.mysql.com/doc/refman/8.0/en/event-scheduler.html">Event Scheduler</a> could be used to implement periodic query execution.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>Dozens of strategies and technologies exist for implementing a distributed worker queue. If you favor PostgreSQL for example, you could use the same strategy as of version 9.5.</p>
+<p>Using the database’s internal lock mechanism has some advantages:</p>
+<ul>
+<li><strong>MySQL is extremely common</strong>. Almost everyone has a MySQL or PostgreSQL installation up and running somewhere. If not, it is <strong>straightforward</strong> to set up. If you don’t want to deal with the setup yourself you could use <strong>managed services</strong> e.g. from any of the top cloud providers.</li>
+<li>Since we are using MySQL internal locking, producer and consumer are <strong>language agnostic</strong>. All you need is a database driver in the programming language of your choice. Furthermore, in a heterogeneous environment where consumer processes are implemented in different languages, using a standard database for coordination can become the lingua franca of your distributed workers.</li>
+</ul>
+<p>Without a doubt, this approach is not made for “web scale” type of workloads. Nonetheless, since we are using database internal locking mechanisms, the <strong>throughput is high enough for a large class of workloads</strong> with hundreds or thousands of work items per second.</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/mysql"
+      >MySQL</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/programming"
+      >Programming</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/distributed-systems"
+      >Distributed Systems</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/software-development"
+      >Software Development</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  >
+    
+    
+    <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="http://localhost:1313/post/cassandra-no-row-consistency/"
+      ><span>WAT - Cassandra: Row level consistency #$@&amp;%*!</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="mx-auto flex h-[4.5rem] max-w-[--w] items-center px-8 text-xs tracking-wider opacity-60"
+>
+  <div class="mr-auto">
+  
+    Copyright © 2024<script>new Date().getFullYear()>2024&&document.write(" - "+new Date().getFullYear());</script> d8a.wtf. <a href="http://creativecommons.org/licenses/by/4.0/">Some rights reserved</a>.
+  
+  </div>
+</footer>
+
+  </body>
+</html>
