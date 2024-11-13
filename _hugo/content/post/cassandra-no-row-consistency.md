@@ -6,7 +6,7 @@ tags = ["cassandra", "WAT", "inconsistency", "timestamp tie"]
 authors = ["Lars"]
 +++
 
-*This post was originally published on [datanerds.io](https://web.archive.org/web/20161126212225/http://datanerds.io/post/cassandra-no-row-consistency/) on Thanksgiving 2016. I've republished it here as part of consolidating my writing on this blog. The original content remains unchanged except for minor formatting adjustments.*
+*This post was originally published on [datanerds.io](https://web.archive.org/web/20161126212225/http://datanerds.io/post/cassandra-no-row-consistency/) on Thanksgiving 2016. I've republished it here as part of consolidating my writing on this blog. The original content remains unchanged.*
 
 *This post sparked some interest on [HackerNews](https://news.ycombinator.com/item?id=13033243) with the usual know-it-all comments.*
 

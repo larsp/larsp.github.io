@@ -65,5 +65,33 @@
       <guid>https://blog.d8a.wtf/tags/wat/</guid>
       <description></description>
     </item>
+    <item>
+      <title>Consensus</title>
+      <link>https://blog.d8a.wtf/tags/consensus/</link>
+      <pubDate>Sat, 26 Mar 2016 18:41:00 +0100</pubDate>
+      <guid>https://blog.d8a.wtf/tags/consensus/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Java</title>
+      <link>https://blog.d8a.wtf/tags/java/</link>
+      <pubDate>Sat, 26 Mar 2016 18:41:00 +0100</pubDate>
+      <guid>https://blog.d8a.wtf/tags/java/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>LACK</title>
+      <link>https://blog.d8a.wtf/tags/lack/</link>
+      <pubDate>Sat, 26 Mar 2016 18:41:00 +0100</pubDate>
+      <guid>https://blog.d8a.wtf/tags/lack/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Lock</title>
+      <link>https://blog.d8a.wtf/tags/lock/</link>
+      <pubDate>Sat, 26 Mar 2016 18:41:00 +0100</pubDate>
+      <guid>https://blog.d8a.wtf/tags/lock/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>
